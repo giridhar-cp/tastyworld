@@ -1,0 +1,112 @@
+.place-order{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 50px;
+    margin: 100px 0px;
+}
+.place-order-left{
+    width: 100%;
+    max-width: max(30%,500px);
+}
+.place-order-left .title{
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+.place-order-left input{
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #C5C5C5;
+    border-radius: 4px;
+    outline-color: tomato;
+}
+.place-order-left .multi-field{
+    display: flex;
+    gap: 10px;
+}
+.place-order-right{
+    width: 100%;
+    max-width: max(40%,500px);
+}
+.place-order-submit{
+    margin-top: 50px;
+    border: none;
+    background-color: tomato;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.payment{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+}
+.payment h2{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.payment .payment-option{
+    display: flex;
+    align-items: center;
+    gap: 10px ;
+    border: 1px solid tomato;
+    padding: 15px;
+    border-radius: 4px;
+    min-width: 300px;
+    cursor: pointer;
+}
+.payment .payment-option:hover{
+    background-color:  #ffe7de;
+}
+
+.delivery-option h2{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.custom-radio {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.custom-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.radio-btn {
+    width: 20px; /* Size of the custom radio button */
+    height: 20px;
+    border: 2px solid orange; /* Border color */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px; /* Space between radio and label */
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.custom-radio input[type="radio"]:checked + .radio-btn {
+    background-color: orange; /* Background color when checked */
+}
+
+.custom-radio input[type="radio"]:checked + .radio-btn::after {
+    content: '';
+    width: 10px; /* Inner dot size */
+    height: 10px;
+    background-color: white; /* Inner dot color */
+    border-radius: 50%; /* Make it circular */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the dot */
+}
+
+@media (max-width:700px) {
+    .place-order{
+        flex-direction: column;
+    }
+}

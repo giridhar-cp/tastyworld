@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "tastyworld-b8169",
+    "staging": "tastyworld-b8169"
+  },
+  "targets": {},
+  "etags": {}
+}

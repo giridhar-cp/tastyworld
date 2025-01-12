@@ -1,0 +1,70 @@
+.auditorium-enquiry {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .gallery {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  
+  .gallery img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #dbbb5b;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .gallery {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .gallery img {
+      max-width: 100%;
+    }
+  
+    .buttons {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  
