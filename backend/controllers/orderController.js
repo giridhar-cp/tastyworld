@@ -1,13 +1,12 @@
-
 import orderModel from "../models/orderModel.js";
-import userModel from "../models/userModel.js"
+import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-//config variables
+// Config variables
 const currency = "GBP";
-const deliveryCharge = 1.5;
-const frontend_URL = 'https://tastyworld-frontend.onrender.com/';
+const serviceFee = 1.5; // Fixed service charge in GBP
+const frontend_URL = 'http://localhost:5173';
 
 // Placing User Order for Frontend using Stripe
 const placeOrder = async (req, res) => {
@@ -28,25 +27,35 @@ const placeOrder = async (req, res) => {
       price_data: {
         currency: currency,
         product_data: { name: item.name },
-        unit_amount: Math.round(item.price * 100), // Ensure amount is in the smallest unit
+        unit_amount: Math.round(item.price * 100), // Ensure amount is in the smallest unit (pence)
       },
       quantity: item.quantity,
     }));
 
-    // Add delivery charge
+    // Add service fee (fixed 1.5 GBP) as a separate line item
     line_items.push({
       price_data: {
         currency: currency,
-        product_data: { name: "Delivery Charge" },
-        unit_amount: Math.round(req.body.deliveryCharge * 100),
+        product_data: { name: "Service Charge" },
+        unit_amount: Math.round(serviceFee * 100), // Fixed 1.5 GBP service charge
       },
       quantity: 1,
     });
 
-    // Convert address object to JSON string
+    // Add delivery charge if applicable (dynamic from the request)
+    line_items.push({
+      price_data: {
+        currency: currency,
+        product_data: { name: "Delivery Charge" },
+        unit_amount: Math.round(req.body.deliveryCharge * 100), // Delivery charge from request
+      },
+      quantity: 1,
+    });
+
+    // Convert address object to JSON string for metadata
     const addressJsonString = JSON.stringify(req.body.address);
 
-    // Metadata for the session
+    // Metadata for the session (save details for later verification)
     const metadata = {
       userId: req.body.userId,
       items: JSON.stringify(req.body.items),
@@ -67,7 +76,7 @@ const placeOrder = async (req, res) => {
       cancel_url: `${frontend_URL}/verify?success=false`,
       line_items: line_items,
       mode: "payment",
-      metadata,
+      metadata,  // Include metadata for order verification
     });
 
     res.json({ success: true, session_url: session.url });
@@ -98,7 +107,7 @@ const verifyOrder = async (req, res) => {
         address, // Use the parsed address object
         deliveryOption: metadata.deliveryOption,
         deliveryCharge: metadata.deliveryCharge,
-        payment: true,
+        payment: true, // Mark as paid
       });
 
       await newOrder.save();
@@ -169,4 +178,3 @@ const updateStatus = async (req, res) => {
 };
 
 export { placeOrder, placeOrderCod, listOrders, userOrders, updateStatus, verifyOrder };
-
