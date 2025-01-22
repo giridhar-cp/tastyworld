@@ -1,3 +1,4 @@
+// Order.jsx
 import React, { useEffect, useState } from 'react';
 import './Orders.css';
 import { toast } from 'react-toastify';
@@ -86,6 +87,9 @@ const Order = () => {
                 </p>
               </div>
               <p className="order-item-phone">{order.address.phone}</p>
+              <p className="order-item-delivery-option">
+                Delivery Option: {order.deliveryOption === "homeDelivery" ? "Home Delivery" : "Takeaway"}
+              </p>
             </div>
             <p>Items: {order.items.length}</p>
             <p>
