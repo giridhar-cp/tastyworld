@@ -200,6 +200,16 @@ const Add = () => {
           <option value="Pizza">Pizza</option>
           <option value="Beverage">Beverage</option>
           <option value="Dessert">Dessert</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Biriyani">Biriyani</option>
+          <option value="Chicken">Chicken</option>
+          <option value="Beef">Beef</option>
+          <option value="Prawns">Prawns</option>
+          <option value="Fish">Fish</option>
+          <option value="Duck">Duck</option>
+          <option value="Fried Rice">Fried Rice</option>
+          <option value="Noodles">Noodles</option>
+          <option value="Porotta">Porotta</option>
         </select>
 
         <button type="submit">Add Product</button>
