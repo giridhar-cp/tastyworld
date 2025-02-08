@@ -54,7 +54,6 @@ const removeFood = async (req, res) => {
 
 export { listFood, addFood, removeFood }
 */
-
 import foodModel from "../models/foodModel.js";
 
 // Get all foods
@@ -71,12 +70,18 @@ const listFood = async (req, res) => {
 // Add food with image upload to Cloudinary
 const addFood = async (req, res) => {
   try {
+    const imageUrl = req.file?.path || req.file?.secure_url; // Get Cloudinary image URL
+
+    if (!imageUrl) {
+      return res.status(400).json({ success: false, message: "Image upload failed" });
+    }
+
     const food = new foodModel({
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
       category: req.body.category,
-      image: req.file.path, // Cloudinary URL
+      image: imageUrl, // Store Cloudinary URL in the database
     });
 
     await food.save();
