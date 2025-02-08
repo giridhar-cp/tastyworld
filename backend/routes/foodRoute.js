@@ -28,8 +28,8 @@ import { storage } from '../config/cloudinary.js';
 const upload = multer({ storage });
 const router = express.Router();
 
-router.get('/list', listFood);
-router.post('/add', upload.single('image'), addFood);
-router.post('/remove', removeFood);
+router.get('/list', listFood);                       // Get all food items
+router.post('/add', upload.single('image'), addFood); // Add new food with image upload
+router.post('/remove', removeFood);                  // Remove food by ID
 
 export default router;
