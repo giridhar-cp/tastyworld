@@ -196,10 +196,6 @@ const Add = () => {
           onChange={(e) => setData({ ...data, category: e.target.value })}
           value={data.category}
         >
-          <option value="Salad">Salad</option>
-          <option value="Pizza">Pizza</option>
-          <option value="Beverage">Beverage</option>
-          <option value="Dessert">Dessert</option>
           <option value="Breakfast">Breakfast</option>
           <option value="Biriyani">Biriyani</option>
           <option value="Chicken">Chicken</option>
