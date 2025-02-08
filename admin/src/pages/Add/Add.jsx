@@ -104,7 +104,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Add = () => {
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(null);
   const [data, setData] = useState({
     name: "",
     description: "",
@@ -124,10 +124,13 @@ const Add = () => {
     formData.append("description", data.description);
     formData.append("price", Number(data.price));
     formData.append("category", data.category);
-    formData.append("image", image);
+    formData.append("image", image);  // Make sure this key matches your backend expectation
 
     try {
-      const response = await axios.post(`${url}/api/food/add`, formData);
+      const response = await axios.post(`${url}/api/food/add`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+
       if (response.data.success) {
         toast.success(response.data.message);
         setData({
@@ -136,11 +139,12 @@ const Add = () => {
           price: "",
           category: "Salad"
         });
-        setImage(false);
+        setImage(null);
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
+      console.error(error);
       toast.error("Error adding food");
     }
   };
@@ -150,14 +154,54 @@ const Add = () => {
       <form className='flex-col' onSubmit={onSubmitHandler}>
         <div className='add-img-upload flex-col'>
           <p>Upload Image</p>
-          <input onChange={(e) => setImage(e.target.files[0])} type="file" accept="image/*" id="image" hidden />
+          <input
+            onChange={(e) => setImage(e.target.files[0])}
+            type="file"
+            accept="image/*"
+            id="image"
+            hidden
+          />
           <label htmlFor="image">
-            <img src={!image ? assets.upload_area : URL.createObjectURL(image)} alt="" />
+            <img src={image ? URL.createObjectURL(image) : assets.upload_area} alt="Upload Preview" />
           </label>
         </div>
-        <input name="name" onChange={(e) => setData({ ...data, name: e.target.value })} value={data.name} placeholder="Product Name" required />
-        <textarea name="description" onChange={(e) => setData({ ...data, description: e.target.value })} value={data.description} placeholder="Description" required />
-        <input type="number" name="price" onChange={(e) => setData({ ...data, price: e.target.value })} value={data.price} placeholder="Price" required />
+
+        <input
+          name="name"
+          onChange={(e) => setData({ ...data, name: e.target.value })}
+          value={data.name}
+          placeholder="Product Name"
+          required
+        />
+
+        <textarea
+          name="description"
+          onChange={(e) => setData({ ...data, description: e.target.value })}
+          value={data.description}
+          placeholder="Description"
+          required
+        />
+
+        <input
+          type="number"
+          name="price"
+          onChange={(e) => setData({ ...data, price: e.target.value })}
+          value={data.price}
+          placeholder="Price"
+          required
+        />
+
+        <select
+          name="category"
+          onChange={(e) => setData({ ...data, category: e.target.value })}
+          value={data.category}
+        >
+          <option value="Salad">Salad</option>
+          <option value="Pizza">Pizza</option>
+          <option value="Beverage">Beverage</option>
+          <option value="Dessert">Dessert</option>
+        </select>
+
         <button type="submit">Add Product</button>
       </form>
     </div>
@@ -165,4 +209,3 @@ const Add = () => {
 };
 
 export default Add;
-
