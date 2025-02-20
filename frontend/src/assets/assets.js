@@ -12,6 +12,10 @@ import menu_7 from './menu_7.png'
 import menu_8 from './menu_8.png'
 import menu_9 from './menu_9.png'
 import menu_10 from './menu_10.png'
+import menu_11 from './menu_7.png'
+import menu_12 from './menu_8.png'
+import menu_13 from './menu_9.png'
+import menu_14 from './menu_10.png'
 
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
@@ -138,6 +142,22 @@ export const menu_list = [
     {
         menu_name: "Porotta",
         menu_image: menu_9
+    },
+    {
+        menu_name: "Vegetables",
+        menu_image: menu_11
+    },
+    {
+        menu_name: "Kerala Special",
+        menu_image: menu_12
+    },
+    {
+        menu_name: "Snacks",
+        menu_image: menu_13
+    },
+    {
+        menu_name: "Combos",
+        menu_image: menu_14
     }]
 
 export const food_list = [
