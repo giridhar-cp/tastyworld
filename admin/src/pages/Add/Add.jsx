@@ -206,6 +206,10 @@ const Add = () => {
           <option value="Fried Rice">Fried Rice</option>
           <option value="Noodles">Noodles</option>
           <option value="Porotta">Porotta</option>
+          <option value="Cake">Kerala Specials</option>
+          <option value="Pure Veg">Snacks</option>
+          <option value="Pasta">Vegetables</option>
+          <option value="Noodles">Combos</option>
         </select>
 
         <button type="submit">Add Product</button>
